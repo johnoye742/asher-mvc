@@ -1,6 +1,6 @@
 <?php
 
-namespace Johnoye742\Assignment;
+namespace Johnoye742\Asher\Asher;
 
 class Router {
     protected $routes = [];

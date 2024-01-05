@@ -1,27 +1,29 @@
 <?php
 
-namespace Johnoye742\Assignment\Models;
+namespace Johnoye742\Asher\Models;
 
-use Johnoye742\Assignment\Models\BaseModel;
+use Johnoye742\Asher\Models\BaseModel;
+use Johnoye742\Asher\Session;
+// Add Sessions class to everypage
+include "src/Asher/Session.php";
 
-class User {
+
+
+class User extends BaseModel implements Model {
     public $username;
     public $password;
     public $role;
     public $tableName = 'users';
-    public $connection;
     
 
     public function __construct($username = '', $password = '', $role = 'user') {
         $this->username = $username;
         $this->password = $password;
         $this -> role = $role;
-        $this -> connection = $GLOBALS['connection'];
+        $this -> connection = $GLOBALS['connection']; 
     }
 
     public function createTable() {
-        
-        
         // Create Users Table
         $this -> connection -> exec("CREATE TABLE $this -> tableName (id INT(10) PRIMARY KEY AUTO_INCREMENT UNSIGNED, username TEXT NOT NULL, pwd TEXT NOT NULL, rle TEXT NOT NULL)");
         echo "Table created successfully";
@@ -81,11 +83,15 @@ class User {
                        excluding the password for security reasons, though not really necessary to exclude.
                     */
                     
-                    header('Location: /home');
+                    
                     // Set the session variable for the current user using an array, we could also use a json using json_encode
-                    $_SESSION['current_user'] = array("username" => $result['username'], "role" => $result['rle']);
                     
+                    $session = new Session(password_hash('session', PASSWORD_BCRYPT), $result['id']);
+                    $session -> setSession(array("username" => $result['username'], "role" => $result['rle']));
                     
+                    if($session -> save()) echo "login successful";
+                    
+                    header('Location: /home');
                     exit;
                     
                     echo 'Login successful';

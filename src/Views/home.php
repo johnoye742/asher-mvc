@@ -1,3 +1,7 @@
+<?php
+use Johnoye742\Asher\Session;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,12 +10,12 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>You are logged in as a <?php echo $_SESSION['current_user']['role'] ?></h1>
+    <h1>You are logged in as <span id="username"></span></h1>
 
     <a href="/logout">Logout</a>
 
     <script>
-        console.log("<?php $_SESSION['current_user'] ?>");
+        document.getElementById('username').innerHTML = <?php echo Session::getSession() ?>['username']
     </script>
 </body>
 </html>

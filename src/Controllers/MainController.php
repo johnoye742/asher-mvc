@@ -1,7 +1,7 @@
 <?php
-namespace Johnoye742\Assignment\Controllers;
+namespace Johnoye742\Asher\Controllers;
 
-use Johnoye742\Assignment\Controller;
+use Johnoye742\Asher\Controller;
 
 class MainController extends Controller {
 

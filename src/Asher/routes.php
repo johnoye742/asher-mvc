@@ -1,8 +1,8 @@
 <?php
 
-use Johnoye742\Assignment\Router;
-use Johnoye742\Assignment\Controllers\UserController;
-use Johnoye742\Assignment\Controllers\MainController;
+use Johnoye742\Asher\Asher\Router;
+use Johnoye742\Asher\Controllers\UserController;
+use Johnoye742\Asher\Controllers\MainController;
 
 $router = new Router();
 

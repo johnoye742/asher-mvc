@@ -11,10 +11,13 @@ require 'vendor/autoload.php';
 $uri = $_SERVER['REQUEST_URI'];
 
 // Require routes.php so we can use the $router variable to display the requested route
-require 'src/routes.php';
+require 'src/Asher/routes.php';
 
 // Add database configs to every page
 include 'config.php';
+
+// Add database config and global connection
+include "src/Asher/database.php";
 
 // Show the requested route
 $router->dispatch($uri);

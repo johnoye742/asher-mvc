@@ -1,9 +1,10 @@
 <?php
 
-namespace Johnoye742\Assignment\Controllers;
+namespace Johnoye742\Asher\Controllers;
 
-use Johnoye742\Assignment\Controller;
-use Johnoye742\Assignment\Models\User;
+use Johnoye742\Asher\Controller;
+use Johnoye742\Asher\Models\User;
+use Johnoye742\Asher\Session;
 
 class UserController extends Controller {
     
@@ -48,16 +49,7 @@ class UserController extends Controller {
     }
 
     public function logout() {
-        // Only log out if there's a logged in user
-        if(isset($_SESSION['current_user'])) {
-            // Destroy the session and then redirect to index page
-            session_destroy();
-            header('Location: /index.php');
-        } else {
-            echo 'there is no user';
-            // If there's a logged in user already, redirect back
-            header('Location: /home');
-        }
+        Session::destroySession();
     }
 }
     
