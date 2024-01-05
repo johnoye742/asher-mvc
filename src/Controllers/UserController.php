@@ -25,5 +25,23 @@ class UserController extends Controller {
         }
         
     }
+
+    public function login() {
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $username = htmlspecialchars($_POST['username']);
+            $password = htmlspecialchars($_POST['password']);
+
+            $user = new User($username, $password);
+
+            $user -> authenticate();
+        }
+
+        $this -> render('login', []);
+    }
+
+    public function hasher() {
+        $this -> render('hasher');
+    }
 }
     
