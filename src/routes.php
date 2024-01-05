@@ -2,6 +2,7 @@
 
 use Johnoye742\Assignment\Router;
 use Johnoye742\Assignment\Controllers\UserController;
+use Johnoye742\Assignment\Controllers\MainController;
 
 $router = new Router();
 
@@ -15,3 +16,6 @@ $router -> addRoute('/createUser', UserController::class, 'registerPost');
 
 $router -> addRoute('/hasher', UserController::class, 'hasher');
     
+$router -> addRoute('/home', MainController::class, 'home');
+
+$router -> addRoute('/logout', UserController::class, 'logout');

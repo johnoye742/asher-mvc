@@ -4,16 +4,19 @@ namespace Johnoye742\Assignment\Models;
 
 use Johnoye742\Assignment\Models\BaseModel;
 
-class User extends BaseModel {
+class User {
     public $username;
     public $password;
     public $role;
     public $tableName = 'users';
+    public $connection;
+    
 
     public function __construct($username = '', $password = '', $role = 'user') {
         $this->username = $username;
         $this->password = $password;
         $this -> role = $role;
+        $this -> connection = new \PDO("mysql:host=localhost;dbname=asher;", "ash", "me");
     }
 
     public function createTable() {
@@ -51,37 +54,46 @@ class User extends BaseModel {
         // Login query statement to know if a user with the credentials exist
         $sql = "SELECT * FROM users WHERE username = :username AND rle = :role;";
 
-        // Prepare the SQL statement
-        $stmt = $this -> connection->prepare($sql);
+        // Check if $connection is not equal to null before proceeding
 
-        // Not adding the values directly to prevent SQL injections
-        $stmt->execute(['username' => $username, 'role' => $role]);
-
-        // Fetch the results in an array
-        $result = $stmt->fetch();
-
-        // Will return false if there was no result
-        if($result) {
-        
-            /* Check if the result is greater than zero, which now thinking about it, that's not really necessary with the 
-               command checking if there is or isnt a result above already, so I commented the line,
-               the password_verify function basically verifies if the stored hash is equal to the password recieved from the login form
-               and if it isn't it'll output "Login failed".
-            */
-            if (/* !count($result) > 0 || */ !password_verify($password, $result['pwd'])) {
-                echo 'Login failed';
-            } else {
-                /* If login was successful, add the user data from the model to the session
-                   excluding the password for security reasons, though not really necessary to exclude.
+        if($this -> connection != null) {
+            // Prepare the SQL statement
+            $stmt = $this -> connection->prepare($sql);
+    
+            // Not adding the values directly to prevent SQL injections
+            $stmt->execute(['username' => $username, 'role' => $role]);
+    
+            // Fetch the results in an array
+            $result = $stmt->fetch();
+    
+            // Will return false if there was no result
+            if($result) {
+            
+                /* Check if the result is greater than zero, which now thinking about it, that's not really necessary with the 
+                   command checking if there is or isnt a result above already, so I commented the line,
+                   the password_verify function basically verifies if the stored hash is equal to the password recieved from the login form
+                   and if it isn't it'll output "Login failed".
                 */
-                session_start();
-                $_SESSION['current_user'] = new User($result['username'], '', $result['rle']);
-                echo 'Login successful';
+                if (/* !count($result) > 0 || */ !password_verify($password, $result['pwd'])) {
+                    echo 'Login failed';
+                } else {
+                    /* If login was successful, add the user data from the model to the session
+                       excluding the password for security reasons, though not really necessary to exclude.
+                    */
+                    session_start();
+                    // Set the session variable for the current user using an array, we could also use a json using json_encode
+                    $_SESSION['current_user'] = array("username" => $result['username'], "role" => $result['rle']);
+
+                    session_destroy();
+                    echo 'Login successful';
+                }
+            } else {
+    
+                // Return login failed if there's no user with those credentials
+                echo 'Login failed';
             }
         } else {
-
-            // Return login failed if there's no user with those credentials
-            echo 'Login failed';
+            echo 'why?';
         }
     }
     

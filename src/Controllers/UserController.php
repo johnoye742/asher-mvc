@@ -43,5 +43,18 @@ class UserController extends Controller {
     public function hasher() {
         $this -> render('hasher');
     }
+
+    public function logout() {
+        // Only log out if there's a logged in user
+        if(isset($_SESSION['current_user'])) {
+            // Remove the user data from the session and then redirect to index
+            unset($_SESSION['current_user']);
+            header('Location: /index.php');
+        } else {
+            echo 'there is no user';
+            // If there's a logged in user already, redirect back
+            header('Location: /home');
+        }
+    }
 }
     

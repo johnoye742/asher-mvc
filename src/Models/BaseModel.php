@@ -14,4 +14,8 @@ class BaseModel {
         $this -> connection = new \PDO("mysql:host=$host;dbname=$dbName;", "$username", "$password");
         
     }
+
+    public function getConnection () {
+        return $this -> connection;
+    }
 }
