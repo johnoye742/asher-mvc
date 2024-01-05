@@ -80,11 +80,14 @@ class User {
                     /* If login was successful, add the user data from the model to the session
                        excluding the password for security reasons, though not really necessary to exclude.
                     */
-                    session_start();
+                    
+                    header('Location: /home');
                     // Set the session variable for the current user using an array, we could also use a json using json_encode
                     $_SESSION['current_user'] = array("username" => $result['username'], "role" => $result['rle']);
-
-                    session_destroy();
+                    
+                    session_commit();
+                    exit;
+                    
                     echo 'Login successful';
                 }
             } else {

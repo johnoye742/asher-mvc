@@ -6,7 +6,7 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>You are logged in as a <?php echo isset($_SESSION['current_user']) ?></h1>
+    <h1>You are logged in as a <?php echo $_SESSION['current_user']['role'] ?></h1>
 
     <a href="/logout">Logout</a>
 

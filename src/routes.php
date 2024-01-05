@@ -6,7 +6,7 @@ use Johnoye742\Assignment\Controllers\MainController;
 
 $router = new Router();
 
-$router->addRoute('/', UserController::class, 'index');
+$router->addRoute('/', MainController::class, 'index');
 
 $router -> addRoute('/register', UserController::class, 'register');
 
