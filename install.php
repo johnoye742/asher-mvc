@@ -1,14 +1,14 @@
 <?php
 
+use Johnoye742\Assignment\Models\User;
 
-$con = new \PDO('mysql:host=localhost', 'ash', 'me');
-$con -> exec('CREATE DATABASE IF NOT EXISTS asher');
+include 'config.php';
+include 'src/Models/User.php';
 
-function createTable() {
-        
-    $connection = new \PDO('mysql:host=localhost;dbname=asher;', 'ash', 'me');
-    $connection -> exec("CREATE TABLE users (id INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT, username TEXT NOT NULL, pwd TEXT NOT NULL, rle TEXT NOT NULL)");
-    echo "Table created successfully";
-}
+print "Creating database 'asher' \n";
+$GLOBALS['connection'] -> exec('CREATE DATABASE IF NOT EXISTS asher');
 
-createTable();
+$user = new User();
+
+print "Creating table 'users' \n";
+$user -> createTable();

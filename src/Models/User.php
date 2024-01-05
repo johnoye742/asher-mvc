@@ -16,7 +16,7 @@ class User {
         $this->username = $username;
         $this->password = $password;
         $this -> role = $role;
-        $this -> connection = new \PDO("mysql:host=localhost;dbname=asher;", "ash", "me");
+        $this -> connection = $GLOBALS['connection'];
     }
 
     public function createTable() {

@@ -5,4 +5,4 @@ $username = 'ash';
 $password = 'me';
 $dbName = 'asher';
 
-$connection = new \PDO("mysql:host=$host;dbname=$dbName;", "$username", "$password");
+$GLOBALS["connection"] = new \PDO("mysql:host=$host;dbname=$dbName;", "$username", "$password");
