@@ -1,0 +1,11 @@
+{
+    "name": "johnoye742/assignment",
+    "type": "project",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Johnoye742\\Assignment\\": "src/"
+        }
+    },
+    "require": {}
+}
