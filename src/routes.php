@@ -8,4 +8,6 @@ $router = new Router();
 $router->addRoute('/', UserController::class, 'index');
 
 $router -> addRoute('/register', UserController::class, 'register');
+
+$router -> addRoute('/createUser', UserController::class, 'registerPost');
     
