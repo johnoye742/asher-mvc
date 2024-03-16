@@ -15,9 +15,9 @@ class UserController extends Controller {
     }
 
     public function registerPost() {
-        if($_SERVER['REQUEST METHOD'] == 'POST') {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $username = htmlspecialchars($_POST['username']);
-            $password = htmlspecialchars($_POST['password']);
+            $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
             $role = htmlspecialchars($_POST['role']);
             $newUser = new User($username, $password, $role);
 
