@@ -85,7 +85,7 @@ class User {
                     // Set the session variable for the current user using an array, we could also use a json using json_encode
                     $_SESSION['current_user'] = array("username" => $result['username'], "role" => $result['rle']);
                     
-                    session_commit();
+                    
                     exit;
                     
                     echo 'Login successful';
