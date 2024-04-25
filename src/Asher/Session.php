@@ -63,7 +63,7 @@ class Session extends BaseModel implements Model {
         $tableName = $GLOBALS['sessions_table'];
         $session_key = $_COOKIE['session_key'];
 
-        $sql = "DELETE * FROM $tableName WHERE session_key = :ses_key";
+        $sql = "DELETE FROM $tableName WHERE session_key = :ses_key";
 
         $stmt = $GLOBALS['connection'] -> prepare($sql);
 

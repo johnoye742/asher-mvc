@@ -4,7 +4,6 @@ namespace Johnoye742\Asher\Models;
 
 use Johnoye742\Asher\Models\BaseModel;
 use Johnoye742\Asher\Session;
-// Add Sessions class to everypage
 include "src/Asher/Session.php";
 
 

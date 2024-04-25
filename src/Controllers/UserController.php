@@ -49,6 +49,7 @@ class UserController extends Controller {
     }
 
     public function logout() {
+        include 'src/Asher/Session.php';
         Session::destroySession();
     }
 }
